@@ -7,6 +7,7 @@ win_cond = False
 possible_skips = [12, 14, 16, 18, 20, 22, 24, 26, 28, 30] 
 tries = 0 
 height_bool = False
+attempt_fail = False
 print("Initial height is 10, after this turn you may skip.") 
 print("Input 'roll' to roll your dice.") 
 print("")
@@ -37,17 +38,19 @@ while win_cond == False:
             tries = tries + 1 
             if tries < 3:
                 print("Next Try") 
+            attempt_fail = True
+            break 
         if tries == 3:
-            print("Your 3 attempts are up.")
-            print("You maxed out at " + str(height) + " feet.") 
             break
     if tries == 3:
         print("")
-        print(str(height) + " is your final score.")
+        print("Your 3 attempts are up.")
+        print("You maxed out at " + str(height_test) + " feet.") 
+        print(str(height_test) + " is your final score.")
         break
-    if move == "ROLL":
-        height = height + 2 
+    if move == "ROLL" and attempt_fail == False:
         height_test = height
+        height = height + 2 
         tries = 0
         print("")        
         skip = str(input("The height has increased by 2, would you like to skip to a greater value? "))
@@ -88,6 +91,8 @@ while win_cond == False:
         print("Help - help")
         print("Settings - settings") 
         print("Close Game - exit") 
-   if move == "SETTINGS":
-       
-
+   
+    if move == "SETTINGS":
+        print("| SETTINGS |") 
+        print("")
+        print("1. ")
