@@ -1,3 +1,4 @@
+print("")
 print("  High Jump") 
 print("") 
 height = 10 
@@ -53,17 +54,19 @@ while win_cond == False:
         skip = skip.upper()
         if skip == "YES":
             print("Possible Skips: " + str(possible_skips))
-            while height_bool == False:
-                height = int(input("Skip to: ")) 
+            while height_bool == False:                             # This while loop uses a boolean value
+                height = int(input("Skip to: "))                    # to make sure any input is valid
                 if height < height_test:
                     print("Invalid Input, you cannot skip to less than your current best.") 
                     height_bool = False
                 elif height > 30:
                     print("Invalid Input, you cannot go past 30 feet.") 
                     height_bool = False 
+                    print("")
                 elif height % 2 == 1:
                     print("Invalid Input, you can only skip to even numbers.") 
                     height_bool = False
+                    print("")
                 else:
                     print("Height skipped to " + str(height)) 
                     height_bool = True
@@ -76,7 +79,7 @@ while win_cond == False:
         print("") 
         print("Game Exited")
         break 
-    if move == "HELP":
+    if move == "HELP":              # Help function
         print("| HELP |") 
         print("")  
         print("FUNCTION - INPUT")
@@ -84,4 +87,7 @@ while win_cond == False:
         print("Roll - roll")
         print("Help - help")
         print("Settings - settings") 
-        print("Close Game - exit")
+        print("Close Game - exit") 
+   if move == "SETTINGS":
+       
+
