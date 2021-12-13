@@ -8,6 +8,7 @@ possible_skips = [12, 14, 16, 18, 20, 22, 24, 26, 28, 30]
 tries = 0 
 height_bool = False
 attempt_fail = False
+height_test = 10
 print("Initial height is 10, after this turn you may skip.") 
 print("Input 'roll' to roll your dice.") 
 print("")
@@ -32,6 +33,8 @@ while win_cond == False:
         print("You scored a " + str(total))
         if total >= height:
             print("You cleared " + str(height) + " feet.") 
+            attempt_fail = False
+            tries = 0
             break
         elif total < height:
             print("You failed to clear " + str(height) + " feet.") 
@@ -49,8 +52,8 @@ while win_cond == False:
         print(str(height_test) + " is your final score.")
         break
     if move == "ROLL" and attempt_fail == False:
-        height_test = height
-        height = height + 2 
+        height_test = height                        # Keeps track of the user's current H.S
+        height = height + 2   
         tries = 0
         print("")        
         skip = str(input("The height has increased by 2, would you like to skip to a greater value? "))
@@ -58,9 +61,9 @@ while win_cond == False:
         if skip == "YES":
             print("Possible Skips: " + str(possible_skips))
             while height_bool == False:                             # This while loop uses a boolean value
-                height = int(input("Skip to: "))                    # to make sure any input is valid
-                if height < height_test:
-                    print("Invalid Input, you cannot skip to less than your current best.") 
+                height = int(input("Skip to: "))                    # to make sure any skip input is valid
+                if height <= height_test:
+                    print("Invalid Input, you cannot skip to less or equal to your current best.") 
                     height_bool = False
                 elif height > 30:
                     print("Invalid Input, you cannot go past 30 feet.") 
@@ -74,9 +77,12 @@ while win_cond == False:
                     print("Height skipped to " + str(height)) 
                     height_bool = True
             height_bool = False
+        elif skip == "EXIT":
+            print("Game Exited")
+            exit()
         else:
             print("No skip, height is up 2 feet.") 
-    if move != "ROLL" and move != "EXIT" and move != "HELP":
+    if move != "ROLL" and move != "EXIT" and move != "HELP" and move != "HIGHSCORE":
         print("Incorrect Input") 
     if move == "EXIT":
         print("") 
@@ -87,12 +93,15 @@ while win_cond == False:
         print("")  
         print("FUNCTION - INPUT")
         print("")
-        print("Roll - roll")
+        print("Roll Dice - roll")
         print("Help - help")
         print("Settings - settings") 
-        print("Close Game - exit") 
+        print("Close Game - exit")
+        print("Current Highscore - highscore")
    
     if move == "SETTINGS":
         print("| SETTINGS |") 
         print("")
         print("1. ")
+    if move == "HIGHSCORE":
+        print("Current Highscore: " + str(height_test))
